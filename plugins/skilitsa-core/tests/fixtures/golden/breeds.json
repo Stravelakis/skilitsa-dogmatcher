@@ -1,0 +1,8 @@
+[
+  { "key": "belgian_malinois",              "traits": { "energy_outdoor": 5, "handler_experience_needed": 5, "shedding": 3, "kid_friendly": 3, "size": 4, "barking": 4, "grooming": 2, "trainability": 5, "separation_tolerance": 2 } },
+  { "key": "cavalier_king_charles_spaniel", "traits": { "energy_outdoor": 2, "handler_experience_needed": 1, "shedding": 3, "kid_friendly": 5, "size": 2, "barking": 2, "grooming": 4, "trainability": 3, "separation_tolerance": 1 } },
+  { "key": "labrador_retriever",            "traits": { "energy_outdoor": 4, "handler_experience_needed": 2, "shedding": 4, "kid_friendly": 5, "size": 4, "barking": 2, "grooming": 2, "trainability": 5, "separation_tolerance": 3 } },
+  { "key": "greyhound",                     "traits": { "energy_outdoor": 3, "handler_experience_needed": 2, "shedding": 1, "kid_friendly": 4, "size": 4, "barking": 1, "grooming": 1, "trainability": 3, "separation_tolerance": 4 } },
+  { "key": "border_collie",                 "traits": { "energy_outdoor": 5, "handler_experience_needed": 4, "shedding": 4, "kid_friendly": 4, "size": 3, "barking": 3, "grooming": 3, "trainability": 5, "separation_tolerance": 2 } },
+  { "key": "french_bulldog",                "traits": { "energy_outdoor": 1, "handler_experience_needed": 2, "shedding": 3, "kid_friendly": 4, "size": 2, "barking": 2, "grooming": 2, "trainability": 2, "separation_tolerance": 1 } }
+]

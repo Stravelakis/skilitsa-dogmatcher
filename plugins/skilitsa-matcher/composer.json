@@ -1,0 +1,26 @@
+{
+  "name": "skilitsa/matcher",
+  "description": "Skilitsa Matcher: the public dog-matching quiz. Requires skilitsa-core.",
+  "type": "wordpress-plugin",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Skilitsa\\Matcher\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Skilitsa\\Matcher\\Tests\\": "tests/",
+      "Skilitsa\\Core\\": "../skilitsa-core/src/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

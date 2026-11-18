@@ -1,0 +1,326 @@
+[
+    {
+        "name": "apartment_first_timer_with_toddler",
+        "description": "Low energy, no experience, cannot tolerate shedding or grooming, needs a kid-safe and trainable dog that copes alone. The Greyhound wins on zero cost for grooming, shedding, barking and separation tolerance, despite losing on size and energy - it is a genuinely good apartment dog. Cavalier and French Bulldog follow within three points, so the close-call flag fires. The Malinois must come last.",
+        "answers": {
+            "Q01": 1,
+            "Q02": 1,
+            "Q03": 1,
+            "Q04": 5,
+            "Q05": 5,
+            "Q06": 1,
+            "Q07": 1,
+            "Q08": 1,
+            "Q09": 4,
+            "Q10": 3
+        },
+        "dealbreakers": [],
+        "ignored": [],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "greyhound",
+                    "score": 68
+                },
+                {
+                    "breed": "labrador_retriever",
+                    "score": 59
+                },
+                {
+                    "breed": "cavalier_king_charles_spaniel",
+                    "score": 55
+                },
+                {
+                    "breed": "french_bulldog",
+                    "score": 52
+                },
+                {
+                    "breed": "border_collie",
+                    "score": 40
+                },
+                {
+                    "breed": "belgian_malinois",
+                    "score": 36
+                }
+            ],
+            "excluded": [],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    },
+    {
+        "name": "experienced_runner_no_kids",
+        "description": "Maximum energy, highly experienced, tolerates shedding, noise and grooming, wants a large trainable dog that copes alone. Labrador edges out the Malinois on one trait only: separation tolerance, where the user asked for 4, the Lab is 3 and the Malinois is 2. The French Bulldog must come last.",
+        "answers": {
+            "Q01": 5,
+            "Q02": 5,
+            "Q03": 5,
+            "Q04": 1,
+            "Q05": 1,
+            "Q06": 5,
+            "Q07": 5,
+            "Q08": 5,
+            "Q09": 5,
+            "Q10": 4
+        },
+        "dealbreakers": [],
+        "ignored": [],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "belgian_malinois",
+                    "score": 70
+                },
+                {
+                    "breed": "labrador_retriever",
+                    "score": 68
+                },
+                {
+                    "breed": "border_collie",
+                    "score": 64
+                },
+                {
+                    "breed": "greyhound",
+                    "score": 59
+                },
+                {
+                    "breed": "cavalier_king_charles_spaniel",
+                    "score": 22
+                },
+                {
+                    "breed": "french_bulldog",
+                    "score": 13
+                }
+            ],
+            "excluded": [],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    },
+    {
+        "name": "shedding_is_a_dealbreaker",
+        "description": "The runner profile, but shedding is an absolute no. Only the Greyhound (shedding 1) survives; the other five are excluded. Nothing is excluded for any other reason, so blocking_dealbreaker stays null because a ranking still exists.",
+        "answers": {
+            "Q01": 5,
+            "Q02": 5,
+            "Q03": 1,
+            "Q04": 1,
+            "Q05": 1,
+            "Q06": 5,
+            "Q07": 5,
+            "Q08": 5,
+            "Q09": 5,
+            "Q10": 4
+        },
+        "dealbreakers": [
+            "Q03"
+        ],
+        "ignored": [],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "greyhound",
+                    "score": 71
+                }
+            ],
+            "excluded": [
+                "belgian_malinois",
+                "labrador_retriever",
+                "border_collie",
+                "cavalier_king_charles_spaniel",
+                "french_bulldog"
+            ],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    },
+    {
+        "name": "every_breed_excluded",
+        "description": "Two dealbreakers no breed satisfies at once. The ranking must be empty and blocking_dealbreaker must name separation_tolerance - the trait excluding the most breeds, and therefore the one worth offering to relax.",
+        "answers": {
+            "Q01": 1,
+            "Q02": 1,
+            "Q03": 1,
+            "Q04": 5,
+            "Q05": 5,
+            "Q06": 1,
+            "Q07": 1,
+            "Q08": 1,
+            "Q09": 5,
+            "Q10": 5
+        },
+        "dealbreakers": [
+            "Q09",
+            "Q10"
+        ],
+        "ignored": [],
+        "expected": {
+            "ranking": [],
+            "excluded": [
+                "greyhound",
+                "labrador_retriever",
+                "cavalier_king_charles_spaniel",
+                "french_bulldog",
+                "border_collie",
+                "belgian_malinois"
+            ],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": "separation_tolerance"
+        }
+    },
+    {
+        "name": "ignores_the_size_question",
+        "description": "Neutral on everything and skips Q06. Size survives on thinner evidence because Q07 also feeds it, so traits_known stays at 9 rather than dropping to 8.",
+        "answers": {
+            "Q01": 3,
+            "Q02": 3,
+            "Q03": 3,
+            "Q04": 3,
+            "Q05": 3,
+            "Q06": 3,
+            "Q07": 3,
+            "Q08": 3,
+            "Q09": 3,
+            "Q10": 3
+        },
+        "dealbreakers": [],
+        "ignored": [
+            "Q06"
+        ],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "greyhound",
+                    "score": 89
+                },
+                {
+                    "breed": "labrador_retriever",
+                    "score": 77
+                },
+                {
+                    "breed": "cavalier_king_charles_spaniel",
+                    "score": 70
+                },
+                {
+                    "breed": "french_bulldog",
+                    "score": 68
+                },
+                {
+                    "breed": "border_collie",
+                    "score": 67
+                },
+                {
+                    "breed": "belgian_malinois",
+                    "score": 57
+                }
+            ],
+            "excluded": [],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    },
+    {
+        "name": "enough_evidence_met",
+        "description": "All ten questions answered, so nine traits are known and the evidence floor of eight is cleared. has_enough_evidence must be true - the only case exercising that branch.",
+        "answers": {
+            "Q01": 4,
+            "Q02": 3,
+            "Q03": 2,
+            "Q04": 4,
+            "Q05": 2,
+            "Q06": 3,
+            "Q07": 3,
+            "Q08": 2,
+            "Q09": 4,
+            "Q10": 3
+        },
+        "dealbreakers": [],
+        "ignored": [],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "greyhound",
+                    "score": 82
+                },
+                {
+                    "breed": "labrador_retriever",
+                    "score": 77
+                },
+                {
+                    "breed": "border_collie",
+                    "score": 61
+                },
+                {
+                    "breed": "french_bulldog",
+                    "score": 60
+                },
+                {
+                    "breed": "cavalier_king_charles_spaniel",
+                    "score": 57
+                },
+                {
+                    "breed": "belgian_malinois",
+                    "score": 53
+                }
+            ],
+            "excluded": [],
+            "traits_known": 9,
+            "has_enough_evidence": true,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    },
+    {
+        "name": "too_few_answers",
+        "description": "Only two questions answered; below the evidence floor. has_enough_evidence must be false, and shrinkage must pull every score toward 50.",
+        "answers": {
+            "Q01": 3,
+            "Q02": 3
+        },
+        "dealbreakers": [],
+        "ignored": [],
+        "expected": {
+            "ranking": [
+                {
+                    "breed": "greyhound",
+                    "score": 83
+                },
+                {
+                    "breed": "cavalier_king_charles_spaniel",
+                    "score": 74
+                },
+                {
+                    "breed": "french_bulldog",
+                    "score": 68
+                },
+                {
+                    "breed": "labrador_retriever",
+                    "score": 63
+                },
+                {
+                    "breed": "border_collie",
+                    "score": 29
+                },
+                {
+                    "breed": "belgian_malinois",
+                    "score": 17
+                }
+            ],
+            "excluded": [],
+            "traits_known": 2,
+            "has_enough_evidence": false,
+            "is_close_call": false,
+            "blocking_dealbreaker": null
+        }
+    }
+]

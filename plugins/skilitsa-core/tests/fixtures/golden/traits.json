@@ -1,0 +1,11 @@
+[
+  { "key": "energy_outdoor",            "penalty_over": 1.5, "penalty_under": 0.5, "global_weight": 1.0 },
+  { "key": "handler_experience_needed", "penalty_over": 1.0, "penalty_under": 0.0, "global_weight": 1.0 },
+  { "key": "shedding",                  "penalty_over": 1.0, "penalty_under": 0.0, "global_weight": 1.0 },
+  { "key": "kid_friendly",              "penalty_over": 0.0, "penalty_under": 1.0, "global_weight": 1.0 },
+  { "key": "size",                      "penalty_over": 1.0, "penalty_under": 1.0, "global_weight": 1.0 },
+  { "key": "barking",                   "penalty_over": 1.0, "penalty_under": 0.0, "global_weight": 1.0 },
+  { "key": "grooming",                  "penalty_over": 1.0, "penalty_under": 0.0, "global_weight": 1.0 },
+  { "key": "trainability",              "penalty_over": 0.0, "penalty_under": 1.0, "global_weight": 1.0 },
+  { "key": "separation_tolerance",      "penalty_over": 0.0, "penalty_under": 1.0, "global_weight": 1.0 }
+]

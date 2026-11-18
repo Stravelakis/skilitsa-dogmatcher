@@ -1,0 +1,266 @@
+/*
+ * Skilitsa admin.
+ *
+ * WordPress's .form-table gives every field a full-width row and ~40px of air.
+ * Nine settings then need a scroll to compare. This lays them out as cards in a
+ * responsive grid: everything about one knob stays together, and the whole
+ * screen fits on one view.
+ *
+ * Line height stays at 1.5 and nothing is italic - accessibility rules from
+ * spec section 9 apply to the admin, not only the public quiz.
+ */
+
+.skilitsa-admin {
+    --skilitsa-line: #dcdcde;
+    --skilitsa-error: #b32d2e;
+    --skilitsa-changed: #8a6d00;
+    max-width: 1100px;
+    line-height: 1.5;
+}
+
+.skilitsa-admin .skilitsa-intro {
+    max-width: 60ch;
+    margin: 0 0 1em;
+}
+
+.skilitsa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin: 0 0 16px;
+}
+
+.skilitsa-field {
+    border: 1px solid var(--skilitsa-line);
+    border-radius: 4px;
+    padding: 10px 12px;
+    background: #fff;
+}
+
+.skilitsa-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.skilitsa-field input[type="number"],
+.skilitsa-field select {
+    width: 100%;
+    margin: 0 0 4px;
+}
+
+.skilitsa-field .skilitsa-help {
+    margin: 0;
+    font-size: 12px;
+    color: #50575e;
+}
+
+.skilitsa-field .skilitsa-default {
+    font-size: 12px;
+    color: #50575e;
+    white-space: nowrap;
+}
+
+.skilitsa-field .skilitsa-changed {
+    color: var(--skilitsa-changed);
+    font-weight: 600;
+}
+
+.skilitsa-field .skilitsa-error {
+    margin: 6px 0 0;
+    padding: 4px 6px;
+    border-left: 3px solid var(--skilitsa-error);
+    background: #fcf0f1;
+    color: var(--skilitsa-error);
+    font-size: 12px;
+}
+
+.skilitsa-field.has-error {
+    border-color: var(--skilitsa-error);
+}
+
+/* A field the owner has moved off its default is worth spotting instantly. */
+.skilitsa-field.is-changed {
+    border-left: 3px solid var(--skilitsa-changed);
+}
+
+@media (prefers-color-scheme: dark) {
+    .skilitsa-field {
+        background: transparent;
+    }
+}
+
+/* --- trait matrix ------------------------------------------------------- */
+
+.skilitsa-summary {
+    margin: 0 0 8px;
+}
+
+.skilitsa-matrix td,
+.skilitsa-matrix th {
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.skilitsa-matrix input[type="number"] {
+    width: 6em;
+}
+
+.skilitsa-matrix .skilitsa-trait-label {
+    display: block;
+}
+
+/* The reason a number is what it is, on the page rather than in a tooltip. */
+.skilitsa-matrix .skilitsa-rationale {
+    display: block;
+    max-width: 52ch;
+    font-weight: 400;
+    font-size: 12px;
+    color: #50575e;
+}
+
+.skilitsa-matrix .skilitsa-default,
+.skilitsa-matrix .skilitsa-error {
+    display: block;
+    font-size: 11px;
+}
+
+.skilitsa-matrix .skilitsa-error {
+    margin-top: 2px;
+    padding: 2px 4px;
+}
+
+.skilitsa-matrix tr.is-tuned th {
+    box-shadow: inset 3px 0 0 var(--skilitsa-changed);
+}
+
+.skilitsa-matrix tr.has-error th {
+    box-shadow: inset 3px 0 0 var(--skilitsa-error);
+}
+
+.skilitsa-matrix .skilitsa-state {
+    font-size: 12px;
+    color: #50575e;
+    white-space: nowrap;
+}
+
+/* Front-end content shown in the admin carries both languages: the Greek the
+   visitor reads, and the English key the code and the sheet use. */
+.skilitsa-matrix .skilitsa-trait-key {
+    display: block;
+    padding: 0;
+    background: none;
+    font-size: 11px;
+    color: #646970;
+}
+
+/* --- breed list --------------------------------------------------------- */
+
+.skilitsa-breeds td,
+.skilitsa-breeds th {
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.skilitsa-breeds .skilitsa-en {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    color: #646970;
+}
+
+.skilitsa-breeds .skilitsa-missing {
+    max-width: 40ch;
+    font-size: 12px;
+    color: #50575e;
+}
+
+/* An incomplete breed still shows up in results, scoring on whatever it has. */
+.skilitsa-breeds tr.is-incomplete th {
+    box-shadow: inset 3px 0 0 var(--skilitsa-error);
+}
+
+.skilitsa-field .skilitsa-trait-key {
+    display: block;
+    padding: 0;
+    margin-bottom: 4px;
+    background: none;
+    font-size: 11px;
+    color: #646970;
+}
+
+/* --- import diff -------------------------------------------------------- */
+
+.skilitsa-diff td,
+.skilitsa-diff th {
+    padding: 6px 8px;
+}
+
+/* A row that shrinks is the one thing nobody notices in a log. */
+.skilitsa-diff tr.is-loss th,
+.skilitsa-diff tr.is-loss td {
+    background: #fcf0f1;
+}
+
+/* --- AI drafts ---------------------------------------------------------- */
+
+.skilitsa-tasks td, .skilitsa-tasks th,
+.skilitsa-drafts td, .skilitsa-drafts th {
+    padding: 6px 8px;
+    vertical-align: top;
+}
+
+.skilitsa-tasks .skilitsa-help,
+.skilitsa-drafts .skilitsa-help {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    color: #646970;
+}
+
+.skilitsa-drafts .skilitsa-why {
+    max-width: 44ch;
+}
+
+.skilitsa-inline {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+/* A draft whose value moved under it cannot be applied, only cleared. */
+.skilitsa-drafts tr.is-stale th {
+    box-shadow: inset 3px 0 0 var(--skilitsa-error);
+}
+
+/* ------------------------------------------------------- colour setting */
+
+.skilitsa-color {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.skilitsa-color input[type="color"] {
+    width: 44px;
+    height: 32px;
+    padding: 2px;
+    border: 1px solid var(--skilitsa-line);
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    flex: none;
+}
+
+/* The text box is what submits: a picker cannot be typed into, pasted into or
+   read aloud, and a brand colour usually arrives already written down. */
+.skilitsa-color input[type="text"] {
+    width: 9em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* The sheet address is long and worth seeing all of. */
+.skilitsa-field input.skilitsa-wide {
+    width: 100%;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+}

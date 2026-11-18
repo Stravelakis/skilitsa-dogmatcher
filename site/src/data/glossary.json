@@ -1,0 +1,32 @@
+[
+  {
+    "term": "Google Sheet",
+    "eli5": "A big table on the internet where you keep lists, like a notebook that many people can open.",
+    "english": "An online spreadsheet. Here it holds the questions, breeds and texts the quiz uses.",
+    "dev": "Source of truth for the quiz data, fetched as CSV through the gviz export and imported into WordPress tables."
+  },
+  {
+    "term": "Shortcode",
+    "eli5": "A tiny magic word in square brackets that tells WordPress to show something.",
+    "english": "A short tag in square brackets that you put on a page to show a plugin's content, such as the quiz.",
+    "dev": "WordPress shortcode; here [skilitsa_matcher]."
+  },
+  {
+    "term": "Trait",
+    "eli5": "Something a dog is like, such as how much energy it has.",
+    "english": "One characteristic of a breed or of what a person wants, such as energy, barking or grooming. The quiz uses 24 of them.",
+    "dev": "A scored dimension with penalty_over, penalty_under and a global weight."
+  },
+  {
+    "term": "Dealbreaker",
+    "eli5": "Something you really cannot live with, so that dog is left out.",
+    "english": "An answer so strong that breeds which conflict with it are excluded from the results.",
+    "dev": "Hard exclusion when the weighted answer crosses dealbreaker_threshold."
+  },
+  {
+    "term": "Custom post type",
+    "eli5": "A special kind of page, made just for one job, like \"breed\".",
+    "english": "A WordPress content type of your own. Here, one entry per dog breed.",
+    "dev": "Breed CPT registered by skilitsa-core."
+  }
+]

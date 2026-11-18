@@ -1,0 +1,30 @@
+{
+  "name": "skilitsa/core",
+  "description": "Skilitsa core: breed data, scoring engine, REST API",
+  "type": "wordpress-plugin",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Skilitsa\\Core\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Skilitsa\\Core\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test:unit": "phpunit --testsuite unit",
+    "test:golden": "phpunit --testsuite golden"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

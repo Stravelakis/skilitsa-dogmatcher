@@ -1,0 +1,13 @@
+[
+  { "question": "Q01", "trait": "energy_outdoor",            "direction": "same",    "weight": 1.0 },
+  { "question": "Q02", "trait": "handler_experience_needed", "direction": "same",    "weight": 1.0 },
+  { "question": "Q03", "trait": "shedding",                  "direction": "same",    "weight": 1.0 },
+  { "question": "Q04", "trait": "kid_friendly",              "direction": "same",    "weight": 1.0 },
+  { "question": "Q05", "trait": "barking",                   "direction": "inverse", "weight": 1.0 },
+  { "question": "Q06", "trait": "size",                      "direction": "same",    "weight": 1.0 },
+  { "question": "Q07", "trait": "energy_outdoor",            "direction": "same",    "weight": 0.5 },
+  { "question": "Q07", "trait": "size",                      "direction": "same",    "weight": 0.5 },
+  { "question": "Q08", "trait": "grooming",                  "direction": "same",    "weight": 1.0 },
+  { "question": "Q09", "trait": "trainability",              "direction": "same",    "weight": 1.0 },
+  { "question": "Q10", "trait": "separation_tolerance",      "direction": "same",    "weight": 1.0 }
+]

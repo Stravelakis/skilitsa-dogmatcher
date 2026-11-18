@@ -1,0 +1,23 @@
+
+# Build output
+# Compiled translations (keep .pot / .po, ship .mo from build)
+# Dependencies
+# Local dev environment (machine-specific)
+# OS / editor
+*.mo
+*.swp
+*.zip
+.DS_Store
+.idea/
+.vscode/
+/build/
+/composer.phar
+/dev/ca-bundle.crt
+/dist/
+/node_modules/
+/plugins/*/.phpunit.result.cache
+/plugins/*/vendor/
+/plugins/skilitsa-matcher/vendor/
+/vendor/
+Thumbs.db
+build/
