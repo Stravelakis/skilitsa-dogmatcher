@@ -2,61 +2,56 @@
 import DocsLayout from '../layouts/DocsLayout.astro';
 import VernacularPanels from '../components/VernacularPanels.astro';
 import FeatureCards from '../components/FeatureCards.astro';
+import LevelPicker from '../components/LevelPicker.astro';
 import Playground from '../components/Playground.astro';
 import ReviewStamp from '../components/ReviewStamp.astro';
 import Glossary from '../components/Glossary.astro';
 import { siteConfig } from '../../site.config.ts';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 import { Content as Dev, frontmatter as devFm } from '../docs/dev.md';
 import { Content as Plain, frontmatter as plainFm } from '../docs/plain.md';
 import { Content as Eli5, frontmatter as eli5Fm } from '../docs/eli5.md';
 
-// One source: GUIDE.md / INSTALL.md copied in by scripts/sync-docs.mjs.
-const features = [
-  {
-    "icon": "🐕",
-    "title": "Matches breeds to people",
-    "text": "Visitors answer questions and see a podium of the best-matching breeds, with a plain reason for each."
-  },
-  {
-    "icon": "📊",
-    "title": "Your data, in a Google Sheet",
-    "text": "Traits, questions, breeds and texts live in a sheet. An import screen shows the differences before anything is applied."
-  },
-  {
-    "icon": "🔗",
-    "title": "Shareable results",
-    "text": "Each result has its own link, /match/<token>/. Reloading it shows the same three breeds."
-  },
-  {
-    "icon": "♿",
-    "title": "Accessible",
-    "text": "Real fieldsets, a real progress bar, keyboard-friendly explanations, and reduced motion respected."
-  },
-  {
-    "icon": "🛠️",
-    "title": "A real admin",
-    "text": "Settings, Traits, Breed data, Breed posts and Import, each with built-in help."
-  },
-  {
-    "icon": "🤖",
-    "title": "Optional AI drafts",
-    "text": "Admin-only. A task can only produce a draft that a person approves. No generated word reaches a visitor."
-  }
-];
+// Read from the plugin itself, so the version shown cannot go stale.
+const coreHeader = readFileSync(resolve(process.cwd(), '..', 'plugins', 'skilitsa-core', 'skilitsa-core.php'), 'utf8');
+const version = (coreHeader.match(/^\s*\*\s*Version:\s*(\S+)/m) || [])[1] ?? '';
 
+// One source: GUIDE.md / INSTALL.md copied in by scripts/sync-docs.mjs.
 const sources = import.meta.glob<{ Content: any }>('../docs/source/*.md', { eager: true });
 const guide = sources['../docs/source/guide.md'];
 const install = sources['../docs/source/install.md'];
+
+const features = [
+  { icon: '🐕', title: 'Matches breeds to people', text: 'Visitors answer questions on a 1 to 5 scale and see a podium of the three best-matching breeds, each with a plain reason.' },
+  { icon: '📊', title: 'Your data, in a Google Sheet', text: 'Traits, questions, breeds and texts live in a sheet. The Import screen shows what would change before anything is written.' },
+  { icon: '🔗', title: 'Shareable results', text: 'Each result has its own link, /match/<token>/. Opening it shows the result as it was first computed.' },
+  { icon: '🚫', title: 'Dealbreakers', text: 'A visitor can mark an answer as a must-have. Breeds that miss it badly are left out and the missing trait is named.' },
+  { icon: '♿', title: 'Built for accessibility', text: 'Real radio buttons in fieldsets, a progress bar that screen readers can read, explanations that open from the keyboard, reduced motion respected.' },
+  { icon: '🤖', title: 'Optional AI drafts', text: 'Admin-only and off until you configure it. A task can only produce a draft that a person approves. No generated word reaches a visitor on its own.' },
+];
 ---
 <DocsLayout title="Overview" home>
-  <section class="hero reveal" id="top">
-    <span class="eyebrow">Docs</span>
+  <section class="frame hero reveal" id="top">
+    <span class="label">Docs{version && ` · v${version}`}</span>
     <h1 class="hero-title">{siteConfig.projectName}</h1>
     <p class="hero-sub">{siteConfig.description}</p>
+    <div class="btns">
+      {siteConfig.heroLinks.map((l) => (
+        <a class:list={['btn', { primary: l.primary }]} href={l.href}>{l.label}</a>
+      ))}
+    </div>
+    <div class="pills">
+      {siteConfig.heroPills.map((t) => (
+        <span class="pill"><i></i>{t}</span>
+      ))}
+    </div>
   </section>
 
-  <FeatureCards features={features} title="What the plugin does" />
+  <LevelPicker />
+
+  <FeatureCards features={features} title="What it does" />
 
   <section class="doc-body reveal" id="docs" aria-label="Documentation" data-glossary>
     <VernacularPanels>
@@ -66,13 +61,14 @@ const install = sources['../docs/source/install.md'];
     </VernacularPanels>
   </section>
 
+  {/* No "reveal" on Install and Guide: it waits for part of a section to be on screen, which a long section never reaches. */}
   {install && (
-    <section class="doc-body doc-source reveal" id="install" aria-label="Install" data-glossary>
+    <section class="doc-body doc-source" id="install" aria-label="Install" data-glossary>
       <install.Content />
     </section>
   )}
   {guide && (
-    <section class="doc-body doc-source reveal" id="guide" aria-label="Guide" data-glossary>
+    <section class="doc-body doc-source" id="guide" aria-label="Guide" data-glossary>
       <guide.Content />
     </section>
   )}
