@@ -1,5 +1,3 @@
-import type { DotFieldOptions } from './src/scripts/dot-field';
-
 // Per-repo config. Most projects only touch this file and src/docs/*.md.
 
 interface SocialLink {
@@ -16,35 +14,46 @@ export const siteConfig = {
   faviconHref: "/skilitsa-dogmatcher/favicon.svg",
 
   // What a link to the site shows when shared (Open Graph / Twitter cards).
-  // seoTitle is the front page's <title> and share title; empty falls back to
-  // "Overview · projectName". socialImage is a 1200x630 PNG in /public
-  // (without the base path); empty means no image, and most platforms then
-  // show a bare, easily-ignored link. Always set both before publishing.
   seoTitle: "Skilitsa DogMatcher: a dog-breed matching quiz for WordPress",
   socialImage: "og-image.png",
   socialImageAlt: "Skilitsa DogMatcher: a dog-breed matching quiz for WordPress.",
   locale: 'en_GB',
 
-  // Sidebar menu. Each id must match an element id on the page.
+  // Left menu, top group. The "On this page" group below it is built from the
+  // headings of the reading level on screen.
   nav: [
     { id: 'top', label: 'Overview' },
-    { id: 'features', label: 'Features' },
-    { id: 'docs', label: 'Docs' },
+    { id: 'features', label: 'What it does' },
   ],
+
+  // Buttons and chips in the hero.
+  heroLinks: [
+    { label: 'Install steps', href: '#install', primary: true },
+    { label: 'Source on GitHub', href: 'https://github.com/Stravelakis/skilitsa-dogmatcher' },
+    { label: 'AI setup notes', href: 'https://github.com/Stravelakis/skilitsa-dogmatcher/blob/HEAD/docs/ai-configuration.md' },
+  ],
+  heroPills: ['Two WordPress plugins', 'Your data in a Google Sheet', 'Same answers, same result', 'GPL-3.0-or-later'],
+
+  // The three cards under the hero. They switch the reading level.
+  levelCards: [
+    { id: 'dev', tag: 'Dev', title: 'How it is built', text: 'The two plugins, the scoring maths, the REST routes, what is stored, what leaves the browser, tests and release.' },
+    { id: 'plain', tag: 'English', title: 'How to use it', text: 'For site owners who do not write code. Install, the Google Sheet, the admin screens, privacy, fixes.' },
+    { id: 'eli5', tag: 'ELI5', title: 'Start from zero', text: 'What WordPress and a plugin are, then every click spelled out, with what you should see.' },
+  ],
+
+  // First visit lands on English; a reader's saved choice still wins.
+  defaultVernacular: 'plain',
 
   // Reading-level switch at the top of the sidebar. The ids are fixed (they
   // match src/docs/dev.md, plain.md, eli5.md); change labels only.
-  // First-visit level (STANDARDS §7: English). A saved choice still wins.
-  defaultVernacular: 'plain',
-
-  // Tally form link (STANDARDS §8). Empty = no "Send feedback" link.
-  feedbackUrl: '',
-
   vernaculars: [
     { id: 'dev', label: 'Dev' },
     { id: 'plain', label: 'English' },
     { id: 'eli5', label: 'ELI5' },
   ],
+
+  // Tally form link (STANDARDS §8). Empty = no "Send feedback" link.
+  feedbackUrl: '',
 
   playground: {
     // true only for JS/web projects, where running the code in the browser is real.
@@ -59,31 +68,4 @@ export const siteConfig = {
       { kind: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/stravelakiscom/' },
     ] as SocialLink[],
   },
-
-  // React Bits "Dot Field" settings, same names as on reactbits.dev.
-  backgrounds: {
-    page: {
-      cursorRadius: 200,
-      bulgeStrength: 6,
-      cursorForce: 0,
-      dotRadius: 2,
-      dotSpacing: 5,
-      glowRadius: 50,
-      sparkle: true,
-      gradientFrom: '#0001c6',
-      gradientTo: '#00cade',
-      glowColor: '#040410',
-    },
-    sidebar: {
-      cursorRadius: 100,
-      bulgeStrength: 0,
-      cursorForce: 0,
-      bulgeOnly: false,
-      dotSpacing: 5,
-      glowRadius: 50,
-      gradientFrom: '#0001c6',
-      gradientTo: '#00cade',
-      glowColor: '#040410',
-    },
-  } satisfies Record<string, DotFieldOptions>,
 };

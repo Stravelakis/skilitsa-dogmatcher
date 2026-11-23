@@ -1,4 +1,4 @@
-# Guide
+# Using DogMatcher
 
 ## What visitors see
 

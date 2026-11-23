@@ -1,4 +1,4 @@
-# Install
+# Install DogMatcher
 
 You need WordPress 6.4 or newer and PHP 8.1 or newer. You also need a Google Sheet with the eight tabs described in the Guide.
 

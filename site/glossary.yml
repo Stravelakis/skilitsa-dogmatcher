@@ -1,24 +1,136 @@
+# Jargon tooltips and ELI5 explainers for the Skilitsa DogMatcher docs site (STANDARDS.md §7).
+# Hover, tap or keyboard-focus a dotted word to read it at your reading level.
+# explainer: true -> a "What's this?" box the first time it appears in the
+# English and ELI5 levels (never in Dev).
+
+WordPress:
+  explainer: true
+  eli5: A free program that runs a website. Most people use it to write pages and posts without writing code.
+  english: The website system your site runs on. This quiz is an add-on for it. You need WordPress 6.4 or newer.
+  dev: The CMS this code extends. Requires WordPress 6.4+ and PHP 8.1+ (plugin headers).
+
+plugin:
+  explainer: true
+  eli5: An add-on for a WordPress website, like an app you add to a phone. It gives the website a new ability.
+  english: An add-on that gives your WordPress site a new feature. DogMatcher is two of them, Skilitsa Core and Skilitsa Matcher.
+  dev: A folder under wp-content/plugins with a main PHP file and a header. Here, skilitsa-core and skilitsa-matcher.
+
 Google Sheet:
+  explainer: true
   eli5: A big table on the internet where you keep lists, like a notebook that many people can open.
   english: An online spreadsheet. Here it holds the questions, breeds and texts the quiz uses.
-  dev: Source of truth for the quiz data, fetched as CSV through the gviz export and imported into WordPress tables.
+  dev: The source of truth for the quiz data. Each of eight tabs is fetched as CSV through the gviz export URL (with headers=1) and planned into WordPress tables.
 
-Shortcode:
-  eli5: A tiny magic word in square brackets that tells WordPress to show something.
-  english: A short tag in square brackets that you put on a page to show a plugin's content, such as the quiz.
-  dev: WordPress shortcode; here [skilitsa_matcher].
+shortcode:
+  explainer: true
+  eli5: A tiny magic word in square brackets that tells WordPress to show something on a page.
+  english: A short tag in square brackets that you put on a page to show a plugin's content. Here it is [skilitsa_matcher].
+  dev: add_shortcode('skilitsa_matcher'). It renders only a mount point div; the client script fills it from REST.
 
-Trait:
+block:
+  eli5: A building piece in the WordPress page editor. You click to add one, like adding a picture or a heading.
+  english: A piece you add in the WordPress page editor. The Skilitsa matcher block puts the quiz on the page.
+  dev: Dynamic block skilitsa/matcher, apiVersion 2. Its render callback calls the same shortcode object.
+
+trait:
   eli5: Something a dog is like, such as how much energy it has.
-  english: One characteristic of a breed or of what a person wants, such as energy, barking or grooming. The quiz uses 24 of them.
-  dev: A scored dimension with penalty_over, penalty_under and a global weight.
+  english: One characteristic of a breed, or of what a visitor wants, such as energy, barking or grooming. The default sheet defines 24.
+  dev: A scored dimension. Each has penalty_over, penalty_under and global_weight, and breeds carry a 1 to 5 value for it.
 
-Dealbreaker:
-  eli5: Something you really cannot live with, so that dog is left out.
-  english: An answer so strong that breeds which conflict with it are excluded from the results.
-  dev: Hard exclusion when the weighted answer crosses dealbreaker_threshold.
+dealbreaker:
+  eli5: Something you really cannot live with, so a dog that has too much of it is left out.
+  english: An answer the visitor marks as a must-have. Breeds that miss it by too much are excluded, and the trait is named.
+  dev: A flag per answer. It makes the question's linked traits salient (double weight) and can exclude a breed when its raw cost reaches dealbreaker_threshold.
 
-Custom post type:
-  eli5: A special kind of page, made just for one job, like "breed".
-  english: A WordPress content type of your own. Here, one entry per dog breed.
-  dev: Breed CPT registered by skilitsa-core.
+custom post type:
+  eli5: A special kind of page made for one job, like "breed".
+  english: A content type of your own in WordPress. Here there is one entry per dog breed, called a Breed post.
+  dev: skilitsa_breed, registered by skilitsa-core, public, at /breeds/<slug>/.
+
+slug:
+  eli5: The last part of a web address that names one page, like the word "border-collie".
+  english: The short name in a page's address. A breed's slug must match its breed_key in the sheet, or its data is skipped.
+  dev: post_name. BreedKey::canonical lowercases it and turns underscores into hyphens before matching sheet keys.
+
+REST API:
+  eli5: A way for two computer programs to talk to each other by asking and answering over the web.
+  english: How the quiz in the visitor's browser talks to your website to fetch questions and get a result.
+  dev: Routes under /wp-json/skilitsa/v1/match/, open to logged-out visitors and rate-limited.
+
+wp-config.php:
+  explainer: true
+  eli5: A settings file for your whole WordPress site. It is kept private on the server, and only a few people ever open it.
+  english: The main settings file of your WordPress site. The optional AI keys go here, never in the admin screens.
+  dev: Read through defined()/constant(). SKILITSA_AI_* constants resolve per task, then shared, then the built-in default.
+
+API key:
+  explainer: true
+  eli5: A secret code from a company that proves it is you asking. Think of a library card; keep it private.
+  english: A secret code from an AI company that lets your site use its service. Only needed for the optional AI drafts.
+  dev: SKILITSA_AI_KEY or SKILITSA_AI_KEY_<TASK>. It goes in a request header and is scrubbed from error messages.
+
+token:
+  eli5: A random code in a web address that stands for one person's result. It works like a coat-check ticket.
+  english: The 12 random characters in a result link, /match/<token>/. Anyone with the link can see that result.
+  dev: 12 characters from a-z0-9 via random_int, about 62 bits. Not signed; result pages are noindex and purged after 90 days.
+
+snapshot:
+  eli5: A saved copy of a result, so it looks the same when you come back to it.
+  english: A saved copy of the result page's content, kept with the token so a shared link keeps showing what the sender saw.
+  dev: JSON of the serialised result view model in match_sessions.result_snapshot. With no snapshot the route recomputes.
+
+deterministic:
+  eli5: It always gives the same answer when you give it the same things. No dice.
+  english: The same answers and the same data always give the same result.
+  dev: No randomness in scoring. Ties break on weighted cost, then breed key. Explanation wording is picked by crc32 of the breed key.
+
+gamma:
+  eli5: A knob for how strict the scoring is.
+  english: The "Scoring strictness" setting. Lower is stricter, higher is more generous. Default 0.7.
+  dev: Exponent applied to each trait's normalised cost (0..1). Default 0.7, bounds 0.1 to 5.
+
+shrinkage:
+  eli5: When we know only a little about you, the score is pulled toward the middle so it does not look too sure.
+  english: The "Caution with few answers" setting. Scores built on few answered traits are pulled toward 50.
+  dev: final = (n x raw + m x 50) / (n + m), where n is the count of traits the visitor's answers gave a value for and m is shrinkage_m (default 1).
+
+noindex:
+  eli5: A note to search engines that says, please do not put this page in your list.
+  english: A tag that keeps a page out of Google. Result pages carry it because they hold one person's answers.
+  dev: Added through the wp_robots filter, together with nofollow, on /match/<token>/.
+
+nonce:
+  eli5: A one-time pass that proves a form really came from your own admin screen.
+  english: A hidden safety code in admin forms. WordPress checks it so nobody can submit a form on your behalf.
+  dev: Created and verified per screen (the Import screen uses a named nonce); admin pages also require manage_options.
+
+transient:
+  eli5: A short note WordPress keeps for a little while and then throws away.
+  english: A short-lived stored value in WordPress. The quiz uses it for its request limit.
+  dev: get_transient/set_transient. The rate limiter keys one by bucket plus a salted hash of the client address, window 60 seconds.
+
+Composer:
+  explainer: true
+  eli5: A tool that fetches and sets up the extra code a PHP program needs.
+  english: A developer tool. Here it is used to generate the loader file each plugin needs before it can run.
+  dev: Autoloading comes from vendor/autoload.php, which is not committed. PHPUnit 10.5 is a dev dependency only.
+
+PHPUnit:
+  eli5: A tool that runs a program's self-checks automatically.
+  english: The testing tool the developers use. Site owners never need it.
+  dev: ^10.5. Core has unit and golden suites; matcher has unit only. Run through each plugin's test.sh.
+
+golden test:
+  eli5: A test that checks the answer against a saved, known-good answer.
+  english: A developer check that compares the quiz's results to saved expected results, to catch accidental changes in scoring.
+  dev: tests/Golden/GoldenMatchTest.php with fixtures in tests/fixtures/golden/ (cases.json and friends).
+
+GPL:
+  eli5: A licence that lets anyone use and change the code, as long as they share their changes the same way.
+  english: The free-software licence of the plugins. You may use, change and share them under the same terms.
+  dev: GPL-3.0-or-later in both plugin headers and in LICENSE. (composer.json files say proprietary; see HANDOFF.)
+
+CSV:
+  eli5: A very plain way to save a table as text, with commas between the boxes.
+  english: A plain-text table format. The plugin asks Google for each sheet tab in this format.
+  dev: Parsed by Skilitsa\Core\Csv\CsvParser, which handles quoted newlines and the Google export quirks.
